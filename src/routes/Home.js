@@ -1,13 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { dbService } from "fbase";
+import {dbService, storageService} from "fbase";
 import { addDoc, collection, getDocs, query, onSnapshot, orderBy } from "firebase/firestore";
-
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import { v4 as uuidV4 } from "uuid";
 import Nweet from "../components/Nweet";
 
 const Home = ({ userObj }) => {
     const [ nweet, setNweet ] = useState("");
     const [ nweets, setNweets ] = useState([]);
-    const [ attachment, setAttachment ] = useState();
+    const [ attachment, setAttachment ] = useState("");
     const fileInput = useRef();
 
     useEffect(() => {
@@ -36,16 +37,40 @@ const Home = ({ userObj }) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        try {
-            // const docRef = await addDoc(collection(dbService, "nweets"), {
-            //     text: nweet,
-            //     createdAt: Date.now(),
-            //     creatorId: userObj.uid,
-            // });
-        } catch (err) {
-            // console.error("Error adding document: ", err);
+
+        let attachmentUrl = "";
+        if (attachment !== "") {
+            // 파일 경로 참조 만들기
+            const fileRef = ref(storageService, `${userObj.uid}/${uuidV4()}`);
+            // storage 참조 경로로 파일 업로드 하기
+            const uploadFile = await uploadString(fileRef, attachment, "data_url");
+            attachmentUrl = await getDownloadURL(uploadFile.ref);
         }
+
+        const nweetPosting = {
+            text: nweet,
+            createdAt: Date.now(),
+            creatorId: userObj.uid,
+            attachmentUrl,
+        };
+
+        await addDoc(collection(dbService, "nweets"), nweetPosting);
         setNweet("");
+        setAttachment("");
+
+
+
+
+        // try {
+        //     const docRef = await addDoc(collection(dbService, "nweets"), {
+        //         text: nweet,
+        //         createdAt: Date.now(),
+        //         creatorId: userObj.uid,
+        //     });
+        // } catch (err) {
+        //     console.error("Error adding document: ", err);
+        // }
+        // setNweet("");
     }
     const onChange = (event) => {
         const { target: { value, } } = event
@@ -64,7 +89,7 @@ const Home = ({ userObj }) => {
     }
 
     const onClearImage = () => {
-        setAttachment(null);
+        setAttachment("");
         fileInput.current.value = "";
     };
 
