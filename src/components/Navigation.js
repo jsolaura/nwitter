@@ -1,11 +1,15 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-const Navigation = () => {
+import {NavLink} from "react-router-dom";
 
+const Navigation = ({ userObj }) => {
+    if (userObj.displayName === null) {
+        const name = userObj.email.split('@')[0];
+        userObj.displayName = name;
+    }
     return (
         <nav>
-            <Link to={"/"}>Home</Link>
-            <Link to={"/profile"}>My Profile</Link>
+            <NavLink exact to={"/"}>Home</NavLink>
+            <NavLink to={"/profile"}>{userObj.displayName} 님의 Profile</NavLink>
         </nav>
     );
 };
