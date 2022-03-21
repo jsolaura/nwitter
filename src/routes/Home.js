@@ -58,9 +58,6 @@ const Home = ({ userObj }) => {
         setNweet("");
         setAttachment("");
 
-
-
-
         // try {
         //     const docRef = await addDoc(collection(dbService, "nweets"), {
         //         text: nweet,
