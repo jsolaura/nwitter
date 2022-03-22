@@ -1,0 +1,14 @@
+.container {
+
+}
+
+.homeWrap {
+    margin-top: 30px;
+}
+
+.profileForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

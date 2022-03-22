@@ -1,0 +1,117 @@
+.nweetContainer {
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, .9);
+    width: 100%;
+    max-width: 320px;
+    padding: 30px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: rgba(0, 0, 0, .9);
+    transition: all .1s;
+}
+.nweetContainer:hover {
+    background: #fff;
+}
+.nweetContainer h4 {
+    font-size: 14px;
+}
+.nweetContainer img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 10px;
+    position: absolute;
+    top: 20px;
+    right: -10px;
+    z-index: 100;
+}
+.nweetEditBtn {
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 5px !important;
+}
+.nweetAction {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.nweetAction span {
+    cursor: pointer;
+}
+.nweetAction span:first-child {
+    margin-right: 1rem;
+}
+
+
+/*factoryContainer*/
+.factoryWrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+.factoryInput {
+    flex-grow: 1;
+    height: 40px;
+    padding: 0 20px;
+    color: #ffffff;
+    border: 1px solid #04aaff;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 12px;
+}
+.factoryArrow {
+    width: 40px;
+    height: 40px;
+    padding: 10px 0;
+    text-align: center;
+    border-radius: 20px;
+    color: #fff;
+    position: absolute;
+    right: 0;
+    background: #04aaff;
+    cursor: pointer;
+}
+.factoryLabel {
+    color: #04aaff;
+    cursor: pointer;
+}
+.factoryLabel span {
+    margin-right: 10px;
+    font-size: 12px;
+}
+.factoryAttachment {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.factoryAttachment img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 40px;
+    margin-bottom: 1rem;
+}
+.factoryFileWrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.factoryFile {
+    opacity: 0;
+}
+.factoryClear {
+    color: #04aaff;
+    cursor: pointer;
+    text-align: center;
+}
+.factoryClear span {
+    margin-right: 10px;
+    font-size: 12px;
+}

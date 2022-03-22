@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
+import "./common.css";
 import {authService, dbService} from "fbase";
-import {collection, getDocs, onSnapshot, orderBy, query, where} from "firebase/firestore"
+import {collection, onSnapshot, orderBy, query, where} from "firebase/firestore"
 import { updateProfile } from "firebase/auth";
-import {Redirect, useHistory, useLocation} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Profile = ({ userObj, refreshUser }) => {
     const history = useHistory();
@@ -42,29 +43,30 @@ const Profile = ({ userObj, refreshUser }) => {
                 console.log(document.id, " => ", document.data())
             ));
         }))
-        // const querySnapshot = await getDocs(q);
-        // querySnapshot.forEach((document) => {
-        //     console.log(document.id, " => ", document.data());
-        // })
-
     };
 
     useEffect(() => {
         getMyNweets();
-    }, [userObj])
+    }, [])
 
     return (
-        <>
-        <form onSubmit={onSubmit}>
-            <input onChange={onChange}
-                   type={"text"}
-                   placeholder={"Display Name"}
-                   value={newDisplayName}
-            />
-            <input type={"submit"} value={"Update Profile"} />
-        </form>
-        <button onClick={onLogOutClick}>Log Out</button>
-        </>
+        <div className={"container"}>
+            <form onSubmit={onSubmit} className={"profileForm"}>
+                <input onChange={onChange}
+                       type={"text"}
+                       placeholder={"Display Name"}
+                       value={newDisplayName}
+                       className={"formInput"}
+                       style={{
+                           marginTop: 10,
+                       }}
+                />
+                <input type={"submit"} value={"Update Profile"} className={"formBtn"} />
+            </form>
+            <span onClick={onLogOutClick} className={"formBtn cancelBtn logOut"}>
+                Log Out
+            </span>
+        </div>
     );
 };
 

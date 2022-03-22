@@ -1,0 +1,60 @@
+.authWrap {
+    margin-top: 1rem;
+}
+.authInput {
+    width: 100%;
+    max-width: 320px;
+    padding: 10px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 1);
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #000;
+}
+.authSubmit {
+    text-align: center;
+    background: #04aaff;
+    color: #ffffff;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.authError {
+    color: tomato;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+}
+.authSwitch {
+    color: #04aaff;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    display: block;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+.authContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.authBtns {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    justify-content: space-between;
+}
+.authBtn {
+    width: 150px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    background: #fff;
+    padding: 10px 0;
+    font-size: 12px;
+    text-align: center;
+    margin: 0 0.5rem;
+}

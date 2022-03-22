@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import styles from "./Auth.module.css";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
 
 const AuthForm = () => {
@@ -42,13 +43,28 @@ const AuthForm = () => {
 
     return (
         <>
-        <form onSubmit={onSubmit}>
-            <input type={"text"} name={"email"} onChange={onChange} placeholder={"Email"} value={email} required/>
-            <input type={"password"} name={"password"} onChange={onChange} placeholder={"Password"} value={password} required/>
-            <input type={"submit"} value={newAccount ? "Create Account" : "Log In"} />
-            {error}
+        <form onSubmit={onSubmit} className={`container ${styles.authWrap}`}>
+            <input type={"text"}
+                   name={"email"}
+                   onChange={onChange}
+                   placeholder={"Email"}
+                   value={email}
+                   className={styles.authInput}
+                   required/>
+            <input type={"password"}
+                   name={"password"}
+                   onChange={onChange}
+                   placeholder={"Password"}
+                   value={password}
+                   className={styles.authInput}
+                   autoComplete={"current-password"}
+                   required/>
+            <input type={"submit"}
+                   className={`${styles.authInput} ${styles.authSubmit}`}
+                   value={newAccount ? "Create Account" : "Log In"} />
+            {error && <span className={styles.authError}>{error}</span> }
         </form>
-        <span onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
+        <span className={styles.authSwitch} onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
         </>
     );
 };
