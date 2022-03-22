@@ -9,8 +9,8 @@ const Profile = ({ userObj, refreshUser }) => {
     const [ newDisplayName, setNewDisplayName ] = useState(userObj.displayName);
 
     const onLogOutClick = () => {
-        authService.signOut()
-            .then(history.push("/"));
+        authService.signOut();
+        history.push("/");
     };
 
     const onSubmit = async (event) => {
@@ -63,7 +63,6 @@ const Profile = ({ userObj, refreshUser }) => {
             />
             <input type={"submit"} value={"Update Profile"} />
         </form>
-        <button onClick={getMyNweets}>ttt</button>
         <button onClick={onLogOutClick}>Log Out</button>
         </>
     );

@@ -8,17 +8,6 @@ function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userObj, setUserObj] = useState(null);
 
-    // user name update 시 주의할 점
-    // 1. 모든 setUserObj 을 ↓ 바꿔줘야함
-    // setUserObj({
-    //     displayName: user.displayName,
-    //     uid: user.uid,
-    //     updateProfile: (args) => updateProfile(user, {displayName : user.displayName}),
-    // });
-    // 2. refreshUser 함수를 child 에게 넘김
-    // 3. 넘긴 child 가 update 가 필요한 component 에 넘김
-    // 4. 인자값으로 넘겨받아 updateProfile(authService.currentUser, { displayName: newDisplayName });
-
     useEffect(() => {
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
@@ -32,6 +21,7 @@ function App() {
                 });
             } else {
                 setIsLoggedIn(false);
+                setUserObj(null);
             }
             setInit(true);
         });

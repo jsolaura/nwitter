@@ -8,77 +8,32 @@ import {
     signInWithPopup
 } from "firebase/auth"
 import { authService } from "fbase";
+import AuthForm from "../components/AuthForm";
 
 const Auth = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [newAccount, setNewAccount] = useState(true);
-    const [error, setError] = useState("");
-
-    const onChange = (event) => {
-        const {target: {name, value}} = event;
-        if (name === "email") {
-            setEmail(value);
-        } else if (name === "password") {
-            setPassword(value);
-        }
-    };
-
-    const onSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            let data;
-            const auth = getAuth();
-            if (newAccount) {
-                // create account
-                data = await createUserWithEmailAndPassword(auth, email, password);
-            } else {
-                // login
-                data = await signInWithEmailAndPassword(auth, email, password);
-            }
-            console.log(data)
-        } catch (err) {
-            setError(err.message.replace("Firebase: ", ""));
-            console.log(err)
-        }
-    }
-
-    const toggleAccount = () => {
-        setNewAccount(prev => !prev);
-    }
-
     const onSocialClick = async (event) => {
         const {target: {name}} = event;
         let provider;
+        let result;
         try {
             if (name === "google") {
                 provider = new GoogleAuthProvider();
-                const result = await signInWithPopup(authService, provider);
-                const credential = GoogleAuthProvider.credentialFromResult(result);
+                result = await signInWithPopup(authService, provider);
+                GoogleAuthProvider.credentialFromResult(result);
                 // const token = credential.accessToken;
             } else if (name === "github") {
                 provider = new GithubAuthProvider();
-                const result = await signInWithPopup(authService, provider);
-                const credential = GithubAuthProvider.credentialFromResult(result);
+                result = await signInWithPopup(authService, provider);
+                GithubAuthProvider.credentialFromResult(result);
                 // const token = credential.accessToken;
             }
-
         } catch (err) {
-
+            alert("이메일이 중독되었습니다.")
         }
-
-        console.log(event.target.name);
     }
-
     return (
         <div>
-            <form onSubmit={onSubmit}>
-                <input type={"text"} name={"email"} onChange={onChange} placeholder={"Email"} value={email} required/>
-                <input type={"password"} name={"password"} onChange={onChange} placeholder={"Password"} value={password} required/>
-                <input type={"submit"} value={newAccount ? "Create Account" : "Log In"} />
-                {error}
-            </form>
-            <span onClick={toggleAccount}>{newAccount ? "Sign In" : "Create Account"}</span>
+            <AuthForm />
             <button name={"google"} onClick={onSocialClick}>Continue with Google</button>
             <button name={"github"} onClick={onSocialClick}>Continue with Github</button>
         </div>
